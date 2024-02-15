@@ -1,14 +1,23 @@
-import { ActionFunctionArgs, json } from "@remix-run/node";
+import {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  json,
+  redirect,
+} from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import { useState } from "react";
 import { FormField } from "~/componenets/form-field";
 import { Layout } from "~/componenets/layout";
-import { login, register } from "~/utils/auth.server";
+import { getUser, login, register } from "~/utils/auth.server";
 import {
   validateEmail,
   validateName,
   validatePassword,
 } from "~/utils/validators.server";
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  return (await getUser(request)) ? redirect("/") : null;
+}
 
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
