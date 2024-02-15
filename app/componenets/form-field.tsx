@@ -23,7 +23,7 @@ export function FormField({
         type={type}
         name={htmlFor}
         value={value}
-        className="w-full p-1 rounded-xl my-2"
+        className="w-full p-2 rounded-xl my-2"
         onChange={onChange}
       />
     </>
